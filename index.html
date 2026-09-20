@@ -1,53 +1,29 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>هوش فیک علی | دستیار هوشمند</title>
-<meta name="description" content="هوش فیک علی؛ یک دستیار هوشمند ساده فارسی برای پرسش و پاسخ و محاسبات ریاضی.">
-<meta name="keywords" content="هوش فیک علی, هوش مصنوعی, دستیار هوشمند, هوش فیک, علی">
-<meta name="robots" content="index, follow">
-<meta property="og:title" content="هوش فیک علی | دستیار هوشمند">
-<meta property="og:description" content="هوش فیک علی؛ دستیار هوشمند ساده فارسی.">
-<meta property="og:type" content="website">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سارا احمدی — طراح صنعتی</title>
 <style>
-  * { box-sizing: border-box; }
-  body { margin:0; font-family:Tahoma,Arial,sans-serif; background:linear-gradient(135deg,#1e293b,#0f172a); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:16px; }
-  .app { width:100%; max-width:480px; background:#111827; border-radius:18px; box-shadow:0 20px 50px rgba(0,0,0,.5); overflow:hidden; display:flex; flex-direction:column; height:640px; }
-  header { background:linear-gradient(90deg,#6366f1,#8b5cf6); padding:16px 20px; color:white; }
-  header h1 { margin:0; font-size:18px; } header p { margin:4px 0 0; font-size:12px; opacity:.85; }
-  .chat { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
-  .msg { max-width:80%; padding:10px 14px; border-radius:14px; font-size:14px; line-height:1.6; white-space:pre-wrap; }
-  .bot { background:#1f2937; color:#e5e7eb; align-self:flex-start; border-bottom-left-radius:4px; }
-  .user { background:#6366f1; color:white; align-self:flex-end; border-bottom-right-radius:4px; }
-  .input-area { display:flex; gap:8px; padding:14px; background:#0f172a; border-top:1px solid #1f2937; }
-  input { flex:1; padding:12px 14px; border-radius:10px; border:none; background:#1f2937; color:white; font-size:14px; outline:none; }
-  button { padding:0 18px; border-radius:10px; border:none; background:#6366f1; color:white; font-weight:bold; cursor:pointer; }
-  button:active { transform:scale(.97); }
-</style>
-</head>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&family=Fraunces:ital,wght@0,600;1,500&display=swap');
+:root{--ink:#1c2b2a;--paper:#eef0e6;--moss:#3f5d54;--clay:#a9622f;--line:rgba(28,43,42,.18)}
+*{box-sizing:border-box;margin:0;padding:0}body{background:var(--paper);color:var(--ink);font-family:'Vazirmatn',sans-serif;line-height:1.7}::selection{background:var(--clay);color:var(--paper)}
+header{padding:2rem 6vw 1.2rem;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line)}.logo{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem}
+nav a{color:var(--ink);text-decoration:none;margin-inline-start:1.8rem;font-size:.95rem;border-bottom:1px solid transparent;transition:border-color .2s ease}nav a:hover{border-color:var(--moss)}
+.hero{padding:9vh 6vw 8vh;max-width:960px}.hero .kicker{font-family:'Fraunces',serif;font-style:italic;color:var(--moss);font-size:1.1rem;margin-bottom:1.2rem}.hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.15;max-width:16ch}.hero p{margin-top:1.8rem;max-width:52ch;font-size:1.15rem;color:#39473f}
+.hero-note{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--line);display:flex;gap:3rem;max-width:52ch;font-size:.95rem;color:#5c6b60}.hero-note strong{display:block;color:var(--ink);font-size:1rem}
+section{padding:6vh 6vw;max-width:960px}.section-title{font-family:'Fraunces',serif;font-size:1.8rem;margin-bottom:2rem}.work-list{display:flex;flex-direction:column}.work-item{display:grid;grid-template-columns:5.5rem 1fr auto;gap:1.5rem;align-items:baseline;padding:1.3rem 0;border-top:1px solid var(--line)}.work-list .work-item:last-child{border-bottom:1px solid var(--line)}.work-item .year{color:var(--moss);font-size:.95rem}.work-item .title{font-weight:500;font-size:1.05rem}.work-item .tag{font-size:.85rem;color:#6b776e;white-space:nowrap}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}.about-grid p{color:#39473f}footer{padding:5vh 6vw 6vh;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}.contact-link{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--clay);padding-bottom:2px}.socials a{color:#5c6b60;text-decoration:none;margin-inline-start:1.3rem;font-size:.9rem}.socials a:hover{color:var(--moss)}
+@media(max-width:640px){header{flex-direction:column;align-items:flex-start;gap:.8rem}nav a{margin-inline-start:0;margin-inline-end:1.2rem}.about-grid{grid-template-columns:1fr}.work-item{grid-template-columns:4rem 1fr}.work-item .tag{grid-column:2}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head>
 <body>
-<div class="app">
-<header><h1>🤖 هوش فیک علی</h1><p>یک سوال بپرس، جواب می‌دهم</p></header>
-<div class="chat" id="chat"><div class="msg bot">سلام! من هوش فیک علی هستم. هر سوالی داری بپرس.</div></div>
-<div class="input-area"><input id="input" type="text" placeholder="سوالت رو بنویس..." /><button onclick="send()">ارسال</button></div>
-</div>
-<script>
-const chat=document.getElementById('chat'),input=document.getElementById('input');
-const knowledge=[
-{keys:['سلام','درود','های'],answer:'سلام! خوش اومدی. چطور می‌تونم کمکت کنم؟'},
-{keys:['اسمت','نامت','کی هستی'],answer:'من هوش فیک علی هستم؛ یک دستیار پرسش و پاسخ ساده که با HTML و جاوااسکریپت ساخته شده.'},
-{keys:['ساعت','زمان'],answer:()=> 'الان ساعت '+new Date().toLocaleTimeString('fa-IR')+' است.'},
-{keys:['تاریخ','امروز چندشنبه'],answer:()=> 'امروز '+new Date().toLocaleDateString('fa-IR')+' است.'},
-{keys:['حالت چطوره','چطوری'],answer:'من که یک برنامه‌ام، همیشه آماده کمکم! تو چطوری؟'},
-{keys:['ممنون','مرسی','تشکر'],answer:'خواهش می‌کنم! خوشحال شدم کمک کردم 🙂'},
-{keys:['خداحافظ','بای'],answer:'خداحافظ! هر وقت خواستی دوباره بپرس.'},
-{keys:['جمع','به علاوه','+'],answer:'برای محاسبات ریاضی ساده، عبارت رو مثل "5+3" بنویس تا حساب کنم.'}];
-function tryMath(text){const cleaned=text.replace(/\s/g,'');if(/^-?\d+(\.\d+)?[\+\-\*\/]\-?\d+(\.\d+)?$/.test(cleaned)){try{return 'نتیجه: '+Function('"use strict";return ('+cleaned+')')();}catch(e){return null;}}return null;}
-function findAnswer(text){const m=tryMath(text);if(m)return m;const lower=text.toLowerCase();for(const item of knowledge){if(item.keys.some(k=>lower.includes(k)))return typeof item.answer==='function'?item.answer():item.answer;}return 'متاسفانه پاسخ این سوال رو در پایگاه دانش ساده‌ام ندارم. این یک ربات پایه مبتنی بر کلیدواژه است، نه هوش مصنوعی واقعی متصل به اینترنت.';}
-function addMessage(text,sender){const div=document.createElement('div');div.className='msg '+sender;div.textContent=text;chat.appendChild(div);chat.scrollTop=chat.scrollHeight;}
-function send(){const text=input.value.trim();if(!text)return;addMessage(text,'user');input.value='';setTimeout(()=>addMessage(findAnswer(text),'bot'),400);}
-input.addEventListener('keydown',e=>{if(e.key==='Enter')send();});
-</script>
-</body>
-</html>
+<header><div class="logo">سارا احمدی</div><nav><a href="#work">نمونه‌کارها</a><a href="#about">درباره</a><a href="#contact">تماس</a></nav></header>
+<div class="hero"><div class="kicker">طراح صنعتی، تهران</div><h1>اشیایی که با دست‌ها حرف می‌زنند</h1><p>شش سال است روی محصولات روزمره کار می‌کنم؛ از ظروف آشپزخانه تا مبلمان کوچک. باور دارم بهترین طراحی، طراحی‌ای‌ست که اصلاً دیده نشود — فقط درست کار کند.</p><div class="hero-note"><div><strong>۱۲</strong>پروژه تولید شده</div><div><strong>۴</strong>جایزه‌ی طراحی</div><div><strong>۲۰۱۹</strong>شروع فعالیت</div></div></div>
+<section id="work"><h2 class="section-title">نمونه‌کارهای اخیر</h2><div class="work-list">
+<div class="work-item"><span class="year">۱۴۰۳</span><span class="title">سری ظروف «خاک»</span><span class="tag">سرامیک</span></div>
+<div class="work-item"><span class="year">۱۴۰۲</span><span class="title">چراغ رومیزی «نی»</span><span class="tag">فلز و چوب</span></div>
+<div class="work-item"><span class="year">۱۴۰۱</span><span class="title">صندلی تاشوی «موج»</span><span class="tag">مبلمان</span></div>
+<div class="work-item"><span class="year">۱۴۰۰</span><span class="title">بسته‌بندی چای «کوهسار»</span><span class="tag">بسته‌بندی</span></div>
+</div></section>
+<section id="about"><h2 class="section-title">درباره‌ی من</h2><div class="about-grid"><p>فارغ‌التحصیل طراحی صنعتی از دانشگاه هنر تهران هستم. کارم را از یک کارگاه کوچک شروع کردم و حالا با چند برند داخلی روی تولید انبوه همکاری می‌کنم.</p><p>علاقه‌ی اصلی‌ام مواد طبیعی و ساخت دستی است؛ سعی می‌کنم در هر پروژه، رد دست انسان هنوز قابل لمس باشد.</p></div></section>
+<footer id="contact"><a class="contact-link" href="mailto:sara@example.com">sara@example.com</a><div class="socials"><a href="#">اینستاگرام</a><a href="#">بیهنس</a></div></footer>
+</body></html>
