@@ -1,29 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>سارا احمدی — طراح صنعتی</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>چای‌خونه | فروشگاه چای</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&family=Fraunces:ital,wght@0,600;1,500&display=swap');
-:root{--ink:#1c2b2a;--paper:#eef0e6;--moss:#3f5d54;--clay:#a9622f;--line:rgba(28,43,42,.18)}
-*{box-sizing:border-box;margin:0;padding:0}body{background:var(--paper);color:var(--ink);font-family:'Vazirmatn',sans-serif;line-height:1.7}::selection{background:var(--clay);color:var(--paper)}
-header{padding:2rem 6vw 1.2rem;display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid var(--line)}.logo{font-family:'Fraunces',serif;font-weight:600;font-size:1.25rem}
-nav a{color:var(--ink);text-decoration:none;margin-inline-start:1.8rem;font-size:.95rem;border-bottom:1px solid transparent;transition:border-color .2s ease}nav a:hover{border-color:var(--moss)}
-.hero{padding:9vh 6vw 8vh;max-width:960px}.hero .kicker{font-family:'Fraunces',serif;font-style:italic;color:var(--moss);font-size:1.1rem;margin-bottom:1.2rem}.hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(2.4rem,6vw,4.4rem);line-height:1.15;max-width:16ch}.hero p{margin-top:1.8rem;max-width:52ch;font-size:1.15rem;color:#39473f}
-.hero-note{margin-top:2.5rem;padding-top:1.2rem;border-top:1px solid var(--line);display:flex;gap:3rem;max-width:52ch;font-size:.95rem;color:#5c6b60}.hero-note strong{display:block;color:var(--ink);font-size:1rem}
-section{padding:6vh 6vw;max-width:960px}.section-title{font-family:'Fraunces',serif;font-size:1.8rem;margin-bottom:2rem}.work-list{display:flex;flex-direction:column}.work-item{display:grid;grid-template-columns:5.5rem 1fr auto;gap:1.5rem;align-items:baseline;padding:1.3rem 0;border-top:1px solid var(--line)}.work-list .work-item:last-child{border-bottom:1px solid var(--line)}.work-item .year{color:var(--moss);font-size:.95rem}.work-item .title{font-weight:500;font-size:1.05rem}.work-item .tag{font-size:.85rem;color:#6b776e;white-space:nowrap}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}.about-grid p{color:#39473f}footer{padding:5vh 6vw 6vh;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}.contact-link{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--clay);padding-bottom:2px}.socials a{color:#5c6b60;text-decoration:none;margin-inline-start:1.3rem;font-size:.9rem}.socials a:hover{color:var(--moss)}
-@media(max-width:640px){header{flex-direction:column;align-items:flex-start;gap:.8rem}nav a{margin-inline-start:0;margin-inline-end:1.2rem}.about-grid{grid-template-columns:1fr}.work-item{grid-template-columns:4rem 1fr}.work-item .tag{grid-column:2}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+:root{--bg:#fbf7ef;--card:#fff;--ink:#26352b;--green:#315b42;--gold:#c28b32;--muted:#6f786f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Tahoma,Arial,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#fffffff2;backdrop-filter:blur(10px);padding:14px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e8e0d2}
+.logo{font-size:23px;font-weight:900;color:var(--green)}.cart{border:0;background:var(--green);color:white;padding:10px 15px;border-radius:14px;font-weight:bold}
+.hero{padding:55px 6% 45px;background:linear-gradient(135deg,#e7f0e4,#fbf7ef)}.hero small{color:var(--gold);font-weight:bold}.hero h1{font-size:clamp(32px,8vw,58px);margin:10px 0}.hero p{max-width:600px;color:var(--muted);line-height:2}
+.wrap{max-width:1100px;margin:auto;padding:35px 5%}.title{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}.title h2{margin:0;font-size:28px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid #eee5d8;border-radius:22px;padding:18px;box-shadow:0 8px 25px #49351a0b}.tea{height:150px;border-radius:17px;background:linear-gradient(145deg,#dce9d8,#a9c39e);display:grid;place-items:center;font-size:58px}.card h3{margin:15px 0 5px}.desc{color:var(--muted);font-size:13px;min-height:40px}.price{font-weight:900;color:var(--green);font-size:19px}.buy{width:100%;border:0;background:var(--green);color:#fff;padding:12px;border-radius:13px;margin-top:12px;font-weight:bold}.badge{display:inline-block;background:#fff1cf;color:#8b651f;padding:4px 8px;border-radius:8px;font-size:11px}
+footer{text-align:center;padding:35px;color:var(--muted);border-top:1px solid #e8e0d2}
 </style></head>
 <body>
-<header><div class="logo">سارا احمدی</div><nav><a href="#work">نمونه‌کارها</a><a href="#about">درباره</a><a href="#contact">تماس</a></nav></header>
-<div class="hero"><div class="kicker">طراح صنعتی، تهران</div><h1>اشیایی که با دست‌ها حرف می‌زنند</h1><p>شش سال است روی محصولات روزمره کار می‌کنم؛ از ظروف آشپزخانه تا مبلمان کوچک. باور دارم بهترین طراحی، طراحی‌ای‌ست که اصلاً دیده نشود — فقط درست کار کند.</p><div class="hero-note"><div><strong>۱۲</strong>پروژه تولید شده</div><div><strong>۴</strong>جایزه‌ی طراحی</div><div><strong>۲۰۱۹</strong>شروع فعالیت</div></div></div>
-<section id="work"><h2 class="section-title">نمونه‌کارهای اخیر</h2><div class="work-list">
-<div class="work-item"><span class="year">۱۴۰۳</span><span class="title">سری ظروف «خاک»</span><span class="tag">سرامیک</span></div>
-<div class="work-item"><span class="year">۱۴۰۲</span><span class="title">چراغ رومیزی «نی»</span><span class="tag">فلز و چوب</span></div>
-<div class="work-item"><span class="year">۱۴۰۱</span><span class="title">صندلی تاشوی «موج»</span><span class="tag">مبلمان</span></div>
-<div class="work-item"><span class="year">۱۴۰۰</span><span class="title">بسته‌بندی چای «کوهسار»</span><span class="tag">بسته‌بندی</span></div>
-</div></section>
-<section id="about"><h2 class="section-title">درباره‌ی من</h2><div class="about-grid"><p>فارغ‌التحصیل طراحی صنعتی از دانشگاه هنر تهران هستم. کارم را از یک کارگاه کوچک شروع کردم و حالا با چند برند داخلی روی تولید انبوه همکاری می‌کنم.</p><p>علاقه‌ی اصلی‌ام مواد طبیعی و ساخت دستی است؛ سعی می‌کنم در هر پروژه، رد دست انسان هنوز قابل لمس باشد.</p></div></section>
-<footer id="contact"><a class="contact-link" href="mailto:sara@example.com">sara@example.com</a><div class="socials"><a href="#">اینستاگرام</a><a href="#">بیهنس</a></div></footer>
-</body></html>
+<header><div class="logo">🍃 چای‌خونه</div><button class="cart" onclick="showCart()">سبد خرید 🛒 <span id="count">0</span></button></header>
+<section class="hero"><small>تازه، خوش‌عطر، ایرانی</small><h1>چای خوب، حال خوب.</h1><p>فروشگاه آنلاین چای‌خونه؛ مجموعه‌ای از چای‌های خوش‌عطر برای صبح‌های آرام و دورهمی‌های گرم.</p></section>
+<main class="wrap"><div class="title"><h2>محبوب‌ترین چای‌ها</h2><span>ارسال سریع 📦</span></div><div class="grid">
+<article class="card"><div class="tea">🔥</div><span class="badge">پرفروش</span><h3>چای سیاه شمال</h3><div class="desc">عطر قوی و طعم اصیل</div><p class="price">۱۸۹٬۰۰۰ تومان</p><button class="buy" onclick="add(0)">افزودن به سبد</button></article><article class="card"><div class="tea">🍵</div><span class="badge">پرفروش</span><h3>چای سبز ممتاز</h3><div class="desc">سبک و تازه با عطر ملایم</div><p class="price">۲۱۹٬۰۰۰ تومان</p><button class="buy" onclick="add(1)">افزودن به سبد</button></article><article class="card"><div class="tea">🌿</div><span class="badge">پرفروش</span><h3>چای دارچین</h3><div class="desc">ترکیب گرم و معطر</div><p class="price">۱۶۹٬۰۰۰ تومان</p><button class="buy" onclick="add(2)">افزودن به سبد</button></article><article class="card"><div class="tea">✨</div><span class="badge">پرفروش</span><h3>چای هل و زعفران</h3><div class="desc">مناسب مهمانی و پذیرایی</div><p class="price">۲۷۹٬۰۰۰ تومان</p><button class="buy" onclick="add(3)">افزودن به سبد</button></article><article class="card"><div class="tea">🌼</div><span class="badge">پرفروش</span><h3>چای بهارنارنج</h3><div class="desc">آرام و خوش‌عطر</div><p class="price">۱۹۹٬۰۰۰ تومان</p><button class="buy" onclick="add(4)">افزودن به سبد</button></article><article class="card"><div class="tea">☕</div><span class="badge">پرفروش</span><h3>چای ماسالا</h3><div class="desc">ادویه‌ای و گرم</div><p class="price">۲۲۹٬۰۰۰ تومان</p><button class="buy" onclick="add(5)">افزودن به سبد</button></article>
+</div></main>
+<footer>© ۱۴۰۵ چای‌خونه — یک فروشگاه نمونه برای نمایش آنلاین</footer>
+<script>
+let count=0;function add(i){count++;document.getElementById("count").textContent=count;alert("چای به سبد خرید اضافه شد 🍵")}function showCart(){alert(count?("تعداد کالا در سبد: "+count):"سبد خرید خالی است")}
+</script></body></html>
