@@ -8,7 +8,10 @@ from telebot import types
 DATA_FILE = "scores.json"
 MAX_NUMBER = 100
 
-bot = telebot.TeleBot(os.environ["BOT_TOKEN"], parse_mode="HTML")
+BOT_TOKEN = os.environ.get("BALE_BOT_TOKEN") or os.environ.get("BOT_TOKEN") or ""
+if not BOT_TOKEN:
+    raise RuntimeError("Missing BALE_BOT_TOKEN secret")
+bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML")
 games = {}
 scores = {}
 
