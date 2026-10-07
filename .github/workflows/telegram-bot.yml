@@ -33,5 +33,5 @@ jobs:
 
       - name: Start Fruitino
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BALE_BOT_TOKEN: ${{ secrets.BALE_BOT_TOKEN || secrets.BOT_TOKEN }}
         run: python -u bot.py
