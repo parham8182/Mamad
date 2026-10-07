@@ -11,7 +11,7 @@ MAX_NUMBER = 100
 BOT_TOKEN = os.environ.get("BALE_BOT_TOKEN") or os.environ.get("BOT_TOKEN") or ""
 if not BOT_TOKEN:
     raise RuntimeError("Missing BALE_BOT_TOKEN secret")
-bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML")
+bot = telebot.TeleBot(BOT_TOKEN, parse_mode="HTML", threaded=False)
 games = {}
 scores = {}
 
