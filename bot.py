@@ -1,58 +1,167 @@
 #!/usr/bin/env python3
-import json, os, random
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import ApplicationBuilder, CallbackQueryHandler, CommandHandler, ContextTypes, MessageHandler, filters
+import json
+import os
+import random
+import telebot
+from telebot import types
 
-TOKEN=os.environ["BOT_TOKEN"]; DATA_FILE="scores.json"; MAX_NUMBER=100
-PERSIAN_DIGITS=str.maketrans("۰۱۲۳۴۵۶۷۸۹","0123456789")
+DATA_FILE = "scores.json"
+MAX_NUMBER = 100
+
+bot = telebot.TeleBot(os.environ["BOT_TOKEN"], parse_mode="HTML")
+games = {}
+scores = {}
 
 def load_scores():
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE,encoding="utf-8") as f:return json.load(f)
-    return {}
-def save_scores(scores):
-    with open(DATA_FILE,"w",encoding="utf-8") as f:json.dump(scores,f,ensure_ascii=False,indent=2)
+    if not os.path.exists(DATA_FILE):
+        return {}
+    try:
+        with open(DATA_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {}
 
-async def start(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    kb=[[InlineKeyboardButton("🎮 شروع بازی جدید",callback_data="new")]]
-    await update.message.reply_text(f"سلام! 👋\nمن یک عدد بین ۱ تا {MAX_NUMBER} انتخاب می‌کنم و تو باید حدس بزنی.\nبعد از هر حدس می‌گم «بالاتر» یا «پایین‌تر».\n\nهرچی با تلاش کمتر ببری، رکورد بهتری می‌زنی! 🏆",reply_markup=InlineKeyboardMarkup(kb))
+def save_scores():
+    with open(DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(scores, f, ensure_ascii=False, indent=2)
 
-async def stats(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    scores=context.bot_data["scores"]; uid=str(update.effective_user.id)
-    if uid in scores: await update.message.reply_text(f"🏆 رکورد تو: {scores[uid]['best']} تلاش\n🎯 تعداد بردها: {scores[uid]['wins']}")
-    else: await update.message.reply_text("هنوز بازی نکردی! با /start شروع کن. 🙂")
+def user_id(message):
+    return str(message.from_user.id)
 
-async def top(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    scores=context.bot_data["scores"]
-    if not scores: await update.message.reply_text("هنوز کسی بازی نکرده! 😐"); return
-    best=sorted(scores.items(),key=lambda x:x[1]["best"])[:10]
-    lines=["🏅 <b>بهترین بازیکنان:</b>"]+[f"{i}. {v['name']} — {v['best']} تلاش" for i,(u,v) in enumerate(best,1)]
-    await update.message.reply_text("\n".join(lines),parse_mode="HTML")
+def name_of(message):
+    return message.from_user.first_name or "بازیکن"
 
-async def new_game(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    q=update.callback_query; await q.answer()
-    context.user_data.update(number=random.randint(1,MAX_NUMBER),tries=0,playing=True)
-    await q.edit_message_text(f"✅ عدد را انتخاب کردم!\nیک عدد بین ۱ تا {MAX_NUMBER} بفرست:")
+def menu():
+    kb = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    kb.row("🎮 بازی جدید", "🏆 آمار من")
+    kb.row("🥇 برترین‌ها", "❓ راهنما")
+    return kb
 
-async def guess(update:Update,context:ContextTypes.DEFAULT_TYPE):
-    if not context.user_data.get("playing"):
-        await update.message.reply_text("اول با /start یک بازی جدید شروع کن. 🙂"); return
-    text=update.message.text.strip().translate(PERSIAN_DIGITS)
-    if not text.lstrip("-").isdigit(): await update.message.reply_text("فقط یک عدد بفرست! 🔢"); return
-    g=int(text)
-    if not 1<=g<=MAX_NUMBER: await update.message.reply_text(f"عدد باید بین ۱ تا {MAX_NUMBER} باشد."); return
-    n=context.user_data["number"]; context.user_data["tries"]+=1; tries=context.user_data["tries"]
-    if g<n: await update.message.reply_text("⬆️ بالاتر برو!"); return
-    if g>n: await update.message.reply_text("⬇️ پایین‌تر بیا!"); return
-    context.user_data["playing"]=False; user=update.effective_user; uid=str(user.id); scores=context.bot_data["scores"]
-    rec=scores.get(uid,{"name":user.first_name,"best":9999,"wins":0}); rec["name"]=user.first_name; rec["wins"]+=1; rec["best"]=min(rec["best"],tries); scores[uid]=rec; save_scores(scores)
-    kb=[[InlineKeyboardButton("🔄 بازی جدید",callback_data="new")]]
-    await update.message.reply_text(f"🎉 آفرین! درست حدس زدی.\nعدد <b>{n}</b> بود و تو در <b>{tries}</b> تلاش پیدایش کردی.\n🏆 بهترین رکوردت: {rec['best']} تلاش",reply_markup=InlineKeyboardMarkup(kb),parse_mode="HTML")
+def start_text():
+    return (
+        "🍌 <b>به Fruitino خوش آمدی!</b> 🍓\n\n"
+        "🎯 من یک عدد بین <b>۱ تا ۱۰۰</b> انتخاب می‌کنم.\n"
+        "تو باید با کمترین تعداد حدس پیدایش کنی.\n\n"
+        "برای شروع روی «🎮 بازی جدید» بزن."
+    )
 
-def main():
-    app=ApplicationBuilder().token(TOKEN).build(); app.bot_data["scores"]=load_scores()
-    app.add_handler(CommandHandler("start",start)); app.add_handler(CommandHandler("stats",stats)); app.add_handler(CommandHandler("top",top))
-    app.add_handler(CallbackQueryHandler(new_game,pattern="^new$")); app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND,guess))
-    print("Bot is running..."); app.run_polling()
+def start_game(message):
+    uid = user_id(message)
+    games[uid] = {"number": random.randint(1, MAX_NUMBER), "tries": 0}
+    bot.send_message(
+        message.chat.id,
+        "🎲 <b>عدد انتخاب شد!</b>\n\nیک عدد بین <b>۱ تا ۱۰۰</b> بفرست."
+    )
 
-if __name__=="__main__": main()
+@bot.message_handler(commands=["start"])
+def start(message):
+    bot.send_message(message.chat.id, start_text(), reply_markup=menu())
+
+@bot.message_handler(commands=["help", "راهنما"])
+def help_command(message):
+    bot.send_message(
+        message.chat.id,
+        "📖 <b>راهنمای Fruitino</b>\n\n"
+        "🎮 بازی جدید: شروع حدس عدد\n"
+        "🏆 آمار من: رکورد و تعداد بردها\n"
+        "🥇 برترین‌ها: ۱۰ رکورد برتر\n\n"
+        "بعد از شروع بازی، فقط عدد ۱ تا ۱۰۰ را بفرست."
+    )
+
+@bot.message_handler(commands=["آمار", "stats"])
+def stats(message):
+    uid = user_id(message)
+    rec = scores.get(uid)
+    if not rec:
+        bot.send_message(message.chat.id, "هنوز بازی نکردی! 😄")
+        return
+    bot.send_message(
+        message.chat.id,
+        f"🏆 <b>آمار تو</b>\n\n"
+        f"🎯 بردها: <b>{rec['wins']}</b>\n"
+        f"⚡ بهترین رکورد: <b>{rec['best']}</b> تلاش"
+    )
+
+@bot.message_handler(commands=["برترین", "top"])
+def top(message):
+    if not scores:
+        bot.send_message(message.chat.id, "هنوز کسی رکوردی ثبت نکرده! 😐")
+        return
+    best = sorted(scores.values(), key=lambda x: x["best"])[:10]
+    lines = ["🥇 <b>۱۰ بازیکن برتر</b>\n"]
+    for i, item in enumerate(best, 1):
+        lines.append(f"{i}. {item['name']} — {item['best']} تلاش")
+    bot.send_message(message.chat.id, "\n".join(lines))
+
+@bot.message_handler(func=lambda m: m.text in ["🎮 بازی جدید", "بازی جدید", "/بازی", "/شروع"])
+def new_game(message):
+    start_game(message)
+
+@bot.message_handler(func=lambda m: m.text in ["🏆 آمار من", "آمار من"])
+def stats_button(message):
+    stats(message)
+
+@bot.message_handler(func=lambda m: m.text in ["🥇 برترین‌ها", "برترین‌ها"])
+def top_button(message):
+    top(message)
+
+@bot.message_handler(func=lambda m: m.text in ["❓ راهنما", "راهنما"])
+def help_button(message):
+    help_command(message)
+
+@bot.message_handler(content_types=["text"])
+def guess(message):
+    uid = user_id(message)
+    if uid not in games:
+        bot.send_message(
+            message.chat.id,
+            "اول روی «🎮 بازی جدید» بزن تا بازی شروع شود. 🙂",
+            reply_markup=menu()
+        )
+        return
+
+    raw = message.text.strip().replace("۰","0").replace("۱","1").replace("۲","2").replace("۳","3").replace("۴","4").replace("۵","5").replace("۶","6").replace("۷","7").replace("۸","8").replace("۹","9")
+    if not raw.isdigit():
+        bot.send_message(message.chat.id, "🔢 فقط یک عدد بین ۱ تا ۱۰۰ بفرست.")
+        return
+
+    guess_number = int(raw)
+    if not 1 <= guess_number <= MAX_NUMBER:
+        bot.send_message(message.chat.id, "⚠️ عدد باید بین ۱ تا ۱۰۰ باشد.")
+        return
+
+    game = games[uid]
+    game["tries"] += 1
+    number = game["number"]
+
+    if guess_number < number:
+        bot.send_message(message.chat.id, "⬆️ بیشتره! یک عدد بزرگ‌تر بزن.")
+        return
+
+    if guess_number > number:
+        bot.send_message(message.chat.id, "⬇️ کمتره! یک عدد کوچک‌تر بزن.")
+        return
+
+    tries = game["tries"]
+    old = scores.get(uid, {"name": name_of(message), "best": 9999, "wins": 0})
+    old["name"] = name_of(message)
+    old["wins"] += 1
+    old["best"] = min(old["best"], tries)
+    scores[uid] = old
+    save_scores()
+    del games[uid]
+
+    bot.send_message(
+        message.chat.id,
+        f"🎉 <b>آفرین {name_of(message)}!</b>\n\n"
+        f"عدد درست <b>{number}</b> بود.\n"
+        f"🎯 در <b>{tries}</b> تلاش پیدا کردی.\n"
+        f"🏆 بهترین رکوردت: <b>{old['best']}</b> تلاش\n\n"
+        "برای بازی دوباره روی «🎮 بازی جدید» بزن.",
+        reply_markup=menu()
+    )
+
+if __name__ == "__main__":
+    scores = load_scores()
+    print("Fruitino Bale bot is running...")
+    bot.infinity_polling(skip_pending=True)
