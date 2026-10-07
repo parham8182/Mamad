@@ -1,1 +1,1 @@
-python-telegram-bot>=21,<23
+telegram-bale-bot==4.36.0
